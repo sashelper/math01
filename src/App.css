@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -35,4 +34,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.large-font {
+  font-size: 30px !important;
+  margin: 5px;
+}
+
+.medium-font-1 {
+  font-size: 1.2rem !important;
+}
+
+.medium-font-2 {
+  font-size: 1.5rem !important;
 }
