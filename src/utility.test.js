@@ -1,5 +1,12 @@
 import { expect } from "chai";
-import { getRandomInt, getTwoNumbers, createExercises } from "./utility";
+import {
+  getRandomInt,
+  getTwoNumbers,
+  createExercises,
+  getThreeNumbersPlus,
+  getThreeNumbersMinus,
+  getThreeNumbers,
+} from "./utility";
 
 describe("getRandomInt", () => {
   let i;
@@ -45,5 +52,72 @@ describe("createExercise", () => {
     // console.log("res", res);
     expect(res).to.be.an("Array");
     expect(res).to.have.lengthOf(100);
+  });
+});
+
+describe("getThreeNumbersPlus", () => {
+  it("op1 = + and op2 = +", () => {
+    let res = getThreeNumbersPlus(100);
+    console.log("res", res);
+    expect(res).to.have.property("op1").equal(1);
+    expect(res).to.have.property("op2").equal(1);
+    expect(res).to.have.property("a").lessThan(100);
+    expect(res).to.have.property("b").lessThan(100);
+    expect(res).to.have.property("c").lessThan(100);
+
+    let times = 1000;
+    for (let i = 0; i < times; i++) {
+      res = getThreeNumbersPlus(100);
+      expect(res.a + res.b + res.c).to.lessThan(101);
+    }
+  });
+});
+
+describe("getThreeNumbersMinus", () => {
+  it("op1 = - and op2 = -", () => {
+    let res = getThreeNumbersMinus(100);
+    console.log("res", res);
+    expect(res).to.have.property("op1").equal(2);
+    expect(res).to.have.property("op2").equal(2);
+    expect(res).to.have.property("a").lessThan(100);
+    expect(res).to.have.property("b").lessThan(100);
+    expect(res).to.have.property("c").lessThan(100);
+
+    let times = 1000;
+    for (let i = 0; i < times; i++) {
+      res = getThreeNumbersMinus(100);
+      expect(res.a - res.b - res.c).to.greaterThan(0);
+    }
+  });
+});
+
+describe("getThreeNumbers", () => {
+  it("op1 = 1, op2 = 2 or op1 = 2, op2 = 1", () => {
+    let res = getThreeNumbers(100);
+    console.log("res", res);
+    expect(res).to.have.property("op1").oneOf([1, 2]);
+    expect(res).to.have.property("op2").oneOf([1, 2]);
+    expect(res.op1).to.not.equal(res.op2);
+    expect(res).to.have.property("a").lessThan(100);
+    expect(res).to.have.property("b").lessThan(100);
+    expect(res).to.have.property("c").lessThan(100);
+
+    let times = 1000;
+    for (let i = 0; i < times; i++) {
+      res = getThreeNumbers(100);
+      if (res.ob1 === 1) {
+        if (
+          expect(res.a + res.b - res.c)
+            .to.greaterThan(0)
+            .and.lessThan(101)
+        ) {
+          console.log("res", res);
+        }
+      } else if (res.ob1 === 2) {
+        expect(res.a - res.b + res.c)
+          .to.greaterThan(0)
+          .and.lessThan(101);
+      }
+    }
   });
 });

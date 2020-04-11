@@ -31,23 +31,6 @@ export default class FormParam extends PureComponent {
         <Card.Body>
           <Form>
             <Form.Row>
-              <Form.Group as={Col} controlId="formScope">
-                <Form.Label>范围: {scope}以内</Form.Label>
-                <Form.Control
-                  value={scope}
-                  onChange={(e) => changeInput(e, "scope")}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formHowMany">
-                <Form.Label>题数</Form.Label>
-                <Form.Control
-                  placeholder="100"
-                  value={howMany}
-                  onChange={(e) => changeInput(e, "howMany")}
-                />
-              </Form.Group>
-
               <Form.Group as={Col} controlId="formtype">
                 <Form.Label>题型</Form.Label>
                 <Select
@@ -56,6 +39,21 @@ export default class FormParam extends PureComponent {
                   name="type"
                   isMulti
                   value={type}
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formScope">
+                <Form.Label>范围: {scope}以内</Form.Label>
+                <Form.Control
+                  value={scope}
+                  onChange={(e) => changeInput(e, "scope")}
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formHowMany">
+                <Form.Label>题数</Form.Label>
+                <Form.Control
+                  placeholder="100"
+                  value={howMany}
+                  onChange={(e) => changeInput(e, "howMany")}
                 />
               </Form.Group>
             </Form.Row>

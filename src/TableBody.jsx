@@ -1,29 +1,14 @@
 import React, { Component } from "react";
+import { getOp } from "./utility";
 
 export default class TableBody extends Component {
   getTd = (obj01, key) => {
     if (!obj01) return null;
 
-    // get op
-    let op;
-    switch (obj01.op1) {
-      case 1:
-        op = "+";
-        break;
-      case 2:
-        op = "-";
-        break;
-
-      case 3:
-        op = "x";
-        break;
-      default:
-        break;
-    }
-
     return (
       <td key={`key-${key}`}>
-        {obj01.a} {op} {obj01.b}
+        {obj01.a} {getOp(obj01.op1)} {obj01.b}{" "}
+        {obj01.op2 ? `${getOp(obj01.op2)} ${obj01.c}` : ""}
         {" ="}
       </td>
     );

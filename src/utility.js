@@ -13,14 +13,13 @@ export function getTwoNumbers(max) {
 // retrun {a: 5, b: 10, op1: 1]
 export function getTwoNumbersPlus(max) {
   const op1 = 1;
-  const sum01 = getRandomInt(20, max);
-  const a = getRandomInt(1, sum01 - 1);
+  let diff;
+  if (max > 20) diff = 10;
+  else diff = 1;
+
+  const sum01 = getRandomInt(Math.floor(max / 2), max);
+  const a = getRandomInt(1, sum01 - diff);
   const b = sum01 - a;
-
-  if (max > 20 && b < 10) {
-    return getTwoNumbersPlus(max);
-  }
-
   return {
     a,
     b,
@@ -28,21 +27,91 @@ export function getTwoNumbersPlus(max) {
   };
 }
 
+// retrun {a: 5, b: 10, c: 25, op1: 1, op2: 1]
+export function getThreeNumbersPlus(max) {
+  const op1 = 1;
+  const op2 = 1;
+
+  let diff;
+  if (max > 20) diff = 10;
+  else diff = 1;
+
+  const sum01 = getRandomInt(Math.floor(max / 2), max);
+  const a = getRandomInt(1, sum01 - diff);
+  const b = getRandomInt(1, sum01 - a - diff);
+  const c = sum01 - a - b;
+
+  return {
+    a,
+    b,
+    c,
+    op1,
+    op2,
+  };
+}
+
 // retrun {a: 5, b: 10, op1: 2]
 export function getTwoNumbersMinus(max) {
   const op1 = 2;
-  const sum01 = getRandomInt(20, max);
-  const a = getRandomInt(1, sum01 - 1);
-  const b = sum01 - a;
+  let diff;
+  if (max > 20) diff = 10;
+  else diff = 1;
 
-  if (max > 20 && b < 10) {
-    return getTwoNumbersMinus(max);
-  }
+  const sum01 = getRandomInt(Math.floor(max / 2), max);
+  const a = getRandomInt(1, sum01 - diff);
+  const b = sum01 - a;
 
   return {
     a: sum01,
     b,
     op1,
+  };
+}
+
+// retrun {a: 5, b: 10, c: 25, op1: 1, op2: 1]
+export function getThreeNumbersMinus(max) {
+  const op1 = 2;
+  const op2 = 2;
+
+  let diff;
+  if (max > 20) diff = 10;
+  else diff = 1;
+
+  const sum01 = getRandomInt(Math.floor(max / 2), max);
+  const a = getRandomInt(1, sum01 - diff);
+  const b = getRandomInt(1, sum01 - a - diff);
+  const c = sum01 - a - b;
+
+  return {
+    a: sum01,
+    b,
+    c,
+    op1,
+    op2,
+  };
+}
+
+// retrun {a: 5, b: 10, c: 25, op1: 1, op2: 2]
+export function getThreeNumbers(max) {
+  const op1 = getRandomInt(1, 2);
+  const op2 = op1 === 1 ? 2 : 1;
+  let c;
+  let res;
+
+  if (op1 === 1) {
+    res = getTwoNumbersPlus(max);
+    const d = res.a + res.b;
+    c = getRandomInt(1, d - 1);
+  } else {
+    res = getThreeNumbersMinus(max);
+    const d = res.a - res.b;
+    c = getRandomInt(1, 100 - d);
+  }
+
+  return {
+    ...res,
+    c,
+    op2,
   };
 }
 
@@ -94,6 +163,18 @@ export const getTypeFunc = (type01) => {
       func01 = getTwoNumbersMinus;
       break;
     }
+    case "3": {
+      func01 = getThreeNumbersPlus;
+      break;
+    }
+    case "4": {
+      func01 = getThreeNumbersMinus;
+      break;
+    }
+    case "5": {
+      func01 = getThreeNumbers;
+      break;
+    }
     case "6": {
       func01 = getTwoNumbersMulti01;
       break;
@@ -124,4 +205,26 @@ export const getTitle = (scope, type) => {
       break;
   }
   return title;
+};
+
+export const getOp = (value) => {
+  // get op
+  let op;
+  switch (value) {
+    case 1:
+      op = "+";
+      break;
+    case 2:
+      op = "-";
+      break;
+    case 3:
+      op = "x";
+      break;
+    case 4:
+      op = "÷";
+      break;
+    default:
+      break;
+  }
+  return op;
 };
