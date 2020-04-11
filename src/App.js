@@ -23,17 +23,41 @@ export default class App extends Component {
     };
   }
 
-  onClickCreate = () => {
-    const { howMany, scope, copy, type } = this.state;
+  onClickCreate = (values) => {
+    const { howMany, scope, copy, type, name, class01, time } = values;
+
+    // set state
+    this.setState({
+      howMany,
+      scope,
+      copy,
+      type,
+      name,
+      class01,
+      time,
+    });
+
     let noType = type.length;
     let noEachType = Math.floor(parseInt(howMany) / noType);
+
+    // how many for each type
+    const arrayNoType = [];
+    for (let i = 0; i < noType; i++) {
+      arrayNoType.push(noEachType);
+    }
+    const remainder = parseInt(howMany) / noType;
+
+    for (let i = 0; i < remainder; i++) {
+      arrayNoType[i] = arrayNoType[i] + 1;
+    }
+
     let arrayExercises00 = [];
 
     for (let page = 0; page < parseInt(copy); page++) {
       let arrayExercises01 = [];
       for (let i = 0; i < noType; i++) {
         let arrayExercises02 = createExercises(
-          noEachType,
+          arrayNoType[i],
           parseInt(scope),
           getTypeFunc(type[i].value)
         );
@@ -52,18 +76,6 @@ export default class App extends Component {
       [name]: e.target.value,
       arrayExercises: [],
     });
-  };
-
-  onClickSaveParams = () => {
-    const { scope, howMany, type, class01, name, time, copy } = this.state;
-
-    localStorage.setItem("scope", scope);
-    localStorage.setItem("howMany", howMany);
-    localStorage.setItem("type", JSON.stringify(type));
-    localStorage.setItem("class01", class01);
-    localStorage.setItem("name", name);
-    localStorage.setItem("time", time);
-    localStorage.setItem("copy", copy);
   };
 
   handleOnChange = (newValue) => {
