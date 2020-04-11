@@ -3,16 +3,17 @@ import { getRandomInt, getTwoNumbers, createExercises } from "./utility";
 
 describe("getRandomInt", () => {
   let i;
-  let times = 100;
+  let times = 1000;
   it("should less than 101", () => {
     for (i = 0; i < times; i++) {
-      let a = getRandomInt(100);
+      let a = getRandomInt(1, 100);
+      // console.log("a", a);
       expect(a).to.lessThan(101);
     }
   });
   it("should not less than 10", () => {
     for (i = 0; i < times; i++) {
-      let a = getRandomInt(100, 10);
+      let a = getRandomInt(10, 100);
       expect(a).to.not.lessThan(10);
     }
   });
@@ -40,9 +41,9 @@ describe("getTwoNumbers", () => {
 
 describe("createExercise", () => {
   it("getTwoNumbers", () => {
-    let res = createExercises(100, 100, 3, getTwoNumbers);
+    let res = createExercises(100, 100, getTwoNumbers);
     // console.log("res", res);
     expect(res).to.be.an("Array");
-    expect(res).to.have.lengthOf(3);
+    expect(res).to.have.lengthOf(100);
   });
 });

@@ -4,21 +4,59 @@ import { Card, Table } from "react-bootstrap";
 export default class ContentPrint extends PureComponent {
   getTd = (obj01, key) => {
     if (!obj01) return null;
+
+    // get op
+    let op;
+    switch (obj01.op1) {
+      case 1:
+        op = "+";
+        break;
+      case 2:
+        op = "-";
+        break;
+
+      case 3:
+        op = "x";
+        break;
+      default:
+        break;
+    }
+
     return (
       <td key={`key-${key}`}>
-        {obj01.a} {obj01.op1 === 1 ? "+" : "-"} {obj01.b}
+        {obj01.a} {op} {obj01.b}
         {" ="}
       </td>
     );
   };
 
+  getTitle = (scope, type) => {
+    let title;
+    if (!type || type.length === 0 || type.length > 1) {
+      return "口算练习题";
+    }
+
+    let typeValue = type[0].value;
+    let typeLabel = type[0].label;
+    switch (typeValue) {
+      case "6":
+        title = `${typeLabel}口算练习题`;
+        break;
+
+      default:
+        title = `${scope}以内${typeLabel}口算练习题`;
+        break;
+    }
+    return title;
+  };
+
   thead = () => {
-    const { scope, howMany, class01, name, time } = this.props;
+    const { scope, howMany, class01, name, time, type } = this.props;
     return (
       <thead>
         <tr>
           <th colSpan={5} className="text-center large-font">
-            {scope}以内加减法口算练习题
+            {this.getTitle(scope, type)}
           </th>
         </tr>
         <tr className="medium-font-1">

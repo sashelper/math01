@@ -13,16 +13,13 @@ export default class App extends Component {
 
     this.state = {
       arrayExercises: [],
-      scope: localStorage.getItem("scope") || 100,
-      howMany: localStorage.getItem("howMany") || 100,
-      type: JSON.parse(localStorage.getItem("type")) || [
-        OPTIONS_TYPE[0],
-        OPTIONS_TYPE[1],
-      ],
+      scope: parseInt(localStorage.getItem("scope")) || 100,
+      howMany: parseInt(localStorage.getItem("howMany")) || 100,
+      type: JSON.parse(localStorage.getItem("type")) || [OPTIONS_TYPE[0]],
       class01: localStorage.getItem("class01") || "",
       name: localStorage.getItem("name") || "",
-      time: localStorage.getItem("time") || 5,
-      copy: localStorage.getItem("copy") || 3,
+      time: parseInt(localStorage.getItem("time")) || 5,
+      copy: parseInt(localStorage.getItem("copy")) || 3,
     };
   }
 
@@ -37,7 +34,7 @@ export default class App extends Component {
       for (let i = 0; i < noType; i++) {
         let arrayExercises02 = createExercises(
           noEachType,
-          scope,
+          parseInt(scope),
           getTypeFunc(type[i].value)
         );
         arrayExercises01 = arrayExercises01.concat(arrayExercises02);
@@ -108,6 +105,7 @@ export default class App extends Component {
             class01={class01}
             name={name}
             time={time}
+            type={type}
             arrayExercises={arrayExercises}
             copy={copy}
           />
