@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "react-bootstrap";
+import { Container, Card, Table } from "react-bootstrap";
 import { OPTIONS_TYPE, createExercises, getTypeFunc } from "./utility";
 import FormParam from "./FormParam";
-import ContentPrint from "./ContentPrint";
-import * as R from "ramda";
+import TableHead from "./TableHead";
+import TableBody from "./TableBody";
 
 export default class App extends Component {
   constructor(props) {
@@ -50,6 +50,7 @@ export default class App extends Component {
   changeInput = (e, name) => {
     this.setState({
       [name]: e.target.value,
+      arrayExercises: [],
     });
   };
 
@@ -99,16 +100,38 @@ export default class App extends Component {
             handleOnChange={this.handleOnChange}
             onClickCreate={this.onClickCreate}
           />
-          <ContentPrint
-            scope={scope}
-            howMany={howMany}
-            class01={class01}
-            name={name}
-            time={time}
-            type={type}
-            arrayExercises={arrayExercises}
-            copy={copy}
-          />
+
+          <Card id="printme">
+            <Card.Header></Card.Header>
+            <Card.Body>
+              {arrayExercises.length === 0 ? (
+                <Table>
+                  <TableHead
+                    scope={scope}
+                    howMany={howMany}
+                    class01={class01}
+                    name={name}
+                    time={time}
+                    type={type}
+                  />
+                </Table>
+              ) : (
+                arrayExercises.map((exercises) => (
+                  <Table responsive>
+                    <TableHead
+                      scope={scope}
+                      howMany={howMany}
+                      class01={class01}
+                      name={name}
+                      time={time}
+                      type={type}
+                    />
+                    <TableBody exercises={exercises} howMany={howMany} />
+                  </Table>
+                ))
+              )}
+            </Card.Body>
+          </Card>
         </Container>
       </div>
     );

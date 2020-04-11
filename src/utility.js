@@ -105,3 +105,23 @@ export const getTypeFunc = (type01) => {
   }
   return func01;
 };
+
+export const getTitle = (scope, type) => {
+  let title;
+  if (!type || type.length === 0 || type.length > 1) {
+    return "口算练习题";
+  }
+
+  let typeValue = type[0].value;
+  let typeLabel = type[0].label;
+  switch (typeValue) {
+    case "6":
+      title = `${typeLabel}口算练习题`;
+      break;
+
+    default:
+      title = `${scope}以内${typeLabel}口算练习题`;
+      break;
+  }
+  return title;
+};
