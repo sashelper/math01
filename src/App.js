@@ -69,6 +69,7 @@ export default class App extends Component {
   handleOnChange = (newValue) => {
     this.setState({
       type: newValue,
+      arrayExercises: [],
     });
   };
 
