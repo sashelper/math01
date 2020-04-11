@@ -103,7 +103,7 @@ export default class App extends Component {
           />
 
           <Card id="printme">
-            <Card.Header></Card.Header>
+            <Card.Header className="no-print"></Card.Header>
             <Card.Body>
               {arrayExercises.length === 0 ? (
                 <Table>

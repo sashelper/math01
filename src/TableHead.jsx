@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getTitle } from "./utility";
+import { Col, Row } from "react-bootstrap";
 
 export default class TableHead extends Component {
   render() {
@@ -7,22 +8,26 @@ export default class TableHead extends Component {
     return (
       <thead>
         <tr>
-          <th colSpan={5} className="text-center large-font">
+          <th colSpan={4} className="text-center large-font">
             {getTitle(scope, type)}
           </th>
         </tr>
-        <tr className="medium-font-1">
-          <th>姓名：{name ? name : "____________"}</th>
-          <th>
-            班级：
-            {class01 ? class01 : "____________"}
+        <tr>
+          <th colSpan={4}>
+            <Row>
+              <Col>姓名：{name ? name : "____________"}</Col>
+              <Col>
+                班级：
+                {class01 ? class01 : "____________"}
+              </Col>
+              <Col>___月___日</Col>
+              <Col>
+                用时：
+                {time ? time : "______"} 分钟
+              </Col>
+              <Col md={3}>做对：_____/{howMany} 题</Col>
+            </Row>
           </th>
-          <th>20___年___月___日</th>
-          <th>
-            用时：
-            {time ? time : "______"} 分钟
-          </th>
-          <th>做对：_____/{howMany} 题</th>
         </tr>
       </thead>
     );

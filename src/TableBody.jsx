@@ -20,9 +20,9 @@ export default class TableBody extends Component {
     let tr01 = [];
     for (let i = 1; i < parseInt(howMany) + 1; i++) {
       tr01.push(this.getTd(exercises[i - 1], i - 1));
-      if (i % 5 === 0) {
+      if (i % 4 === 0) {
         res.push(
-          <tr className="medium-font-2" key={`key-tr-${i / 5}`}>
+          <tr className="medium-font-1" key={`key-tr-${i / 5}`}>
             {tr01}
           </tr>
         );
@@ -31,7 +31,7 @@ export default class TableBody extends Component {
     }
     if (tr01.length > 0)
       res.push(
-        <tr className="medium-font-2" key={`key-tr-last`}>
+        <tr className="medium-font-1" key={`key-tr-last`}>
           {tr01}
         </tr>
       );
