@@ -187,8 +187,10 @@ export const getTypeFunc = (type01) => {
   return func01;
 };
 
-export const getTitle = (scope, type) => {
-  let title;
+export const getTitle = (scope, type, title01) => {
+  if (!!title01) return title01;
+  let title = "口算练习题";
+
   if (!type || type.length === 0 || type.length > 1) {
     return "口算练习题";
   }

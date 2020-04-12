@@ -13,28 +13,30 @@ export default class App extends Component {
 
     this.state = {
       arrayExercises: [],
+      type: JSON.parse(localStorage.getItem("type")) || [OPTIONS_TYPE[0]],
       scope: parseInt(localStorage.getItem("scope")) || 100,
       howMany: parseInt(localStorage.getItem("howMany")) || 100,
-      type: JSON.parse(localStorage.getItem("type")) || [OPTIONS_TYPE[0]],
-      class01: localStorage.getItem("class01") || "",
-      name: localStorage.getItem("name") || "",
-      time: parseInt(localStorage.getItem("time")) || 5,
       copy: parseInt(localStorage.getItem("copy")) || 3,
+      name: localStorage.getItem("name") || "",
+      class01: localStorage.getItem("class01") || "",
+      time: parseInt(localStorage.getItem("time")) || 5,
+      title: localStorage.getItem("title") || "",
     };
   }
 
   onClickCreate = (values) => {
-    const { howMany, scope, copy, type, name, class01, time } = values;
+    const { type, scope, howMany, copy, name, class01, time, title } = values;
 
     // set state
     this.setState({
-      howMany,
-      scope,
-      copy,
       type,
+      scope,
+      howMany,
+      copy,
       name,
       class01,
       time,
+      title,
     });
 
     let noType = type.length;
@@ -71,46 +73,31 @@ export default class App extends Component {
     });
   };
 
-  changeInput = (e, name) => {
-    this.setState({
-      [name]: e.target.value,
-      arrayExercises: [],
-    });
-  };
-
-  handleOnChange = (newValue) => {
-    this.setState({
-      type: newValue,
-      arrayExercises: [],
-    });
-  };
-
   render() {
     const {
+      arrayExercises,
+      type,
       scope,
       howMany,
-      class01,
-      name,
-      type,
-      time,
-      arrayExercises,
       copy,
+      name,
+      class01,
+      time,
+      title,
     } = this.state;
 
     return (
       <div className="App">
         <Container>
           <FormParam
+            type={type}
             scope={scope}
             howMany={howMany}
-            class01={class01}
-            name={name}
-            time={time}
-            type={type}
             copy={copy}
-            changeInput={this.changeInput}
-            onClickSaveParams={this.onClickSaveParams}
-            handleOnChange={this.handleOnChange}
+            name={name}
+            class01={class01}
+            time={time}
+            title={title}
             onClickCreate={this.onClickCreate}
           />
 
@@ -120,24 +107,26 @@ export default class App extends Component {
               {arrayExercises.length === 0 ? (
                 <Table>
                   <TableHead
+                    type={type}
                     scope={scope}
                     howMany={howMany}
-                    class01={class01}
                     name={name}
+                    class01={class01}
                     time={time}
-                    type={type}
+                    title={title}
                   />
                 </Table>
               ) : (
                 arrayExercises.map((exercises) => (
                   <Table responsive>
                     <TableHead
+                      type={type}
                       scope={scope}
                       howMany={howMany}
-                      class01={class01}
                       name={name}
+                      class01={class01}
                       time={time}
-                      type={type}
+                      title={title}
                     />
                     <TableBody exercises={exercises} howMany={howMany} />
                   </Table>

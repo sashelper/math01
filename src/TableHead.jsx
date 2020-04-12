@@ -4,12 +4,12 @@ import { Col, Row } from "react-bootstrap";
 
 export default class TableHead extends Component {
   render() {
-    const { scope, howMany, class01, name, time, type } = this.props;
+    const { scope, howMany, class01, name, time, type, title } = this.props;
     return (
       <thead>
         <tr>
           <th colSpan={4} className="text-center large-font">
-            {getTitle(scope, type)}
+            {getTitle(scope, type, title)}
           </th>
         </tr>
         <tr>

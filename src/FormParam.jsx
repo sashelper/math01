@@ -18,12 +18,14 @@ const schema = yup.object({
         })
         .nullable()
     ),
+
   scope: yup.number().positive().integer().required("必填"),
   howMany: yup.number().positive().integer().lessThan(1001).required("必填"),
   copy: yup.number().positive().integer().lessThan(1001).required("必填"),
   name: yup.string().max(10, "长度须小于10个字符"),
   class01: yup.string().max(10, "长度须小于10个字符"),
   time: yup.number(),
+  title: yup.string().max(50, "长度须小于50个字符"),
 });
 
 export default class FormParam extends PureComponent {
@@ -32,27 +34,29 @@ export default class FormParam extends PureComponent {
   };
 
   onClickSaveParams = (values) => {
-    const { scope, howMany, type, class01, name, time, copy } = values;
+    const { scope, howMany, type, class01, name, time, copy, title } = values;
 
+    localStorage.setItem("type", JSON.stringify(type));
     localStorage.setItem("scope", scope);
     localStorage.setItem("howMany", howMany);
-    localStorage.setItem("type", JSON.stringify(type));
-    localStorage.setItem("class01", class01);
-    localStorage.setItem("name", name);
-    localStorage.setItem("time", time);
     localStorage.setItem("copy", copy);
+    localStorage.setItem("name", name);
+    localStorage.setItem("class01", class01);
+    localStorage.setItem("time", time);
+    localStorage.setItem("title", title);
   };
 
   render() {
     const {
-      scope,
-      onClickCreate,
       type,
+      scope,
       howMany,
+      copy,
       name,
       class01,
       time,
-      copy,
+      title,
+      onClickCreate,
     } = this.props;
 
     return (
@@ -71,10 +75,11 @@ export default class FormParam extends PureComponent {
               type,
               scope,
               howMany,
+              copy,
               name,
               class01,
               time,
-              copy,
+              title,
             }}
           >
             {({
@@ -87,7 +92,7 @@ export default class FormParam extends PureComponent {
               errors,
               setFieldValue,
             }) => (
-              <Form noValidate onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="formtype">
                     <Form.Label>题型*</Form.Label>
@@ -97,7 +102,9 @@ export default class FormParam extends PureComponent {
                         setFieldValue("type", value);
                       }}
                       name="type"
-                      className={errors.type ? "is-invalid" : null}
+                      className={
+                        !values.type || !!errors.type ? "is-invalid" : null
+                      }
                       isMulti
                       value={values.type}
                       error={errors.type}
@@ -164,7 +171,7 @@ export default class FormParam extends PureComponent {
                       onChange={handleChange}
                       isInvalid={!!errors.class01}
                     />
-                    <Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
                       {errors.class01}
                     </Form.Control.Feedback>
                   </Form.Group>
@@ -176,7 +183,21 @@ export default class FormParam extends PureComponent {
                       onChange={handleChange}
                       isInvalid={!!errors.time}
                     />
-                    <Form.Control.Feedback>{errors.time}</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.time}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col} controlId="formTitle">
+                    <Form.Label>标题</Form.Label>
+                    <Form.Control
+                      value={values.title}
+                      name="title"
+                      onChange={handleChange}
+                      isInvalid={!!errors.title}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {errors.title}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Form.Row>
                 <div className="mb-2">
@@ -184,13 +205,15 @@ export default class FormParam extends PureComponent {
                     variant="primary"
                     size="lg"
                     onClick={() => this.onClickSaveParams(values)}
+                    disabled={!isValid}
                   >
                     保存参数
                   </Button>{" "}
                   <Button
                     variant="primary"
                     size="lg"
-                    onClick={() => onClickCreate(values)}
+                    type="submit"
+                    disabled={!isValid}
                   >
                     生成习题
                   </Button>{" "}
@@ -198,6 +221,7 @@ export default class FormParam extends PureComponent {
                     variant="primary"
                     size="lg"
                     onClick={this.onClickPrint}
+                    disabled={!isValid}
                   >
                     打印
                   </Button>
