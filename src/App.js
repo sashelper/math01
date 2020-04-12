@@ -104,34 +104,22 @@ export default class App extends Component {
           <Card id="printme">
             <Card.Header className="no-print"></Card.Header>
             <Card.Body>
-              {arrayExercises.length === 0 ? (
-                <Table>
-                  <TableHead
-                    type={type}
-                    scope={scope}
-                    howMany={howMany}
-                    name={name}
-                    class01={class01}
-                    time={time}
-                    title={title}
-                  />
-                </Table>
-              ) : (
-                arrayExercises.map((exercises) => (
-                  <Table responsive>
-                    <TableHead
-                      type={type}
-                      scope={scope}
-                      howMany={howMany}
-                      name={name}
-                      class01={class01}
-                      time={time}
-                      title={title}
-                    />
-                    <TableBody exercises={exercises} howMany={howMany} />
-                  </Table>
-                ))
-              )}
+              {arrayExercises.length > 0
+                ? arrayExercises.map((exercises) => (
+                    <Table responsive>
+                      <TableHead
+                        type={type}
+                        scope={scope}
+                        howMany={howMany}
+                        name={name}
+                        class01={class01}
+                        time={time}
+                        title={title}
+                      />
+                      <TableBody exercises={exercises} howMany={howMany} />
+                    </Table>
+                  ))
+                : null}
             </Card.Body>
           </Card>
         </Container>
