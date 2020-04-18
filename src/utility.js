@@ -187,7 +187,7 @@ export const getTypeFunc = (type01) => {
   return func01;
 };
 
-export const getTitle = (scope, type, title01) => {
+export const getTitle = (scope, type, title01, howMany) => {
   if (!!title01) return title01;
   let title = "口算练习题";
 
@@ -199,11 +199,11 @@ export const getTitle = (scope, type, title01) => {
   let typeLabel = type[0].label;
   switch (typeValue) {
     case "6":
-      title = `${typeLabel}口算练习题`;
+      title = `${typeLabel}口算练习${howMany}题`;
       break;
 
     default:
-      title = `${scope}以内${typeLabel}口算练习题`;
+      title = `${scope}以内${typeLabel}口算练习${howMany}题`;
       break;
   }
   return title;

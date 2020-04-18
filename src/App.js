@@ -19,7 +19,7 @@ export default class App extends Component {
       copy: parseInt(localStorage.getItem("copy")) || 3,
       name: localStorage.getItem("name") || "",
       class01: localStorage.getItem("class01") || "",
-      time: parseInt(localStorage.getItem("time")) || 5,
+      time: parseInt(localStorage.getItem("time")) || "",
       title: localStorage.getItem("title") || "",
     };
   }

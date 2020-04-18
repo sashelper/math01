@@ -96,7 +96,7 @@ export default class FormParam extends PureComponent {
               <>
                 <Form onSubmit={handleSubmit}>
                   <Form.Row>
-                    <Form.Group as={Col} controlId="formtype">
+                    <Form.Group as={Col} controlId="formtype" md={3}>
                       <Form.Label>题型*</Form.Label>
                       <Select
                         options={OPTIONS_TYPE}
@@ -115,7 +115,7 @@ export default class FormParam extends PureComponent {
                         {errors.type}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formScope">
+                    <Form.Group as={Col} controlId="formScope" md={3}>
                       <Form.Label>范围*: {values.scope}以内</Form.Label>
                       <Form.Control
                         value={values.scope}
@@ -127,7 +127,7 @@ export default class FormParam extends PureComponent {
                         {errors.scope}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formHowMany">
+                    <Form.Group as={Col} controlId="formHowMany" md={3}>
                       <Form.Label>题数*</Form.Label>
                       <Form.Control
                         value={values.howMany}
@@ -139,7 +139,7 @@ export default class FormParam extends PureComponent {
                         {errors.howMany}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formCopy">
+                    <Form.Group as={Col} controlId="formCopy" md={3}>
                       <Form.Label>份数*</Form.Label>
                       <Form.Control
                         value={values.copy}
@@ -152,8 +152,8 @@ export default class FormParam extends PureComponent {
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Form.Row>
-                  <Form.Row>
-                    <Form.Group as={Col} controlId="formName">
+                  <Form.Row className="d-none d-md-flex">
+                    <Form.Group as={Col} controlId="formName" md={3}>
                       <Form.Label>姓名</Form.Label>
                       <Form.Control
                         value={values.name}
@@ -165,7 +165,7 @@ export default class FormParam extends PureComponent {
                         {errors.name}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formClass">
+                    <Form.Group as={Col} controlId="formClass" md={3}>
                       <Form.Label>班级</Form.Label>
                       <Form.Control
                         value={values.class01}
@@ -177,7 +177,7 @@ export default class FormParam extends PureComponent {
                         {errors.class01}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formTime">
+                    <Form.Group as={Col} controlId="formTime" md={3}>
                       <Form.Label>时间（分钟）</Form.Label>
                       <Form.Control
                         value={values.time}
@@ -189,7 +189,7 @@ export default class FormParam extends PureComponent {
                         {errors.time}
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formTitle">
+                    <Form.Group as={Col} controlId="formTitle" md={3}>
                       <Form.Label>标题</Form.Label>
                       <Form.Control
                         value={values.title}
@@ -202,7 +202,7 @@ export default class FormParam extends PureComponent {
                       </Form.Control.Feedback>
                     </Form.Group>
                   </Form.Row>
-                  <Card>
+                  <Card className="d-none d-xl-flex">
                     <Card.Header>页眉预览</Card.Header>
                     <Card.Body>
                       <Table>
@@ -224,6 +224,7 @@ export default class FormParam extends PureComponent {
                       size="lg"
                       onClick={() => this.onClickSaveParams(values)}
                       disabled={!isValid}
+                      className="d-none d-md-inline"
                     >
                       保存参数
                     </Button>{" "}
