@@ -115,11 +115,25 @@ export function getThreeNumbers(max) {
   };
 }
 
-// retrun {a: 5, b: 10, op1: 1]
+// retrun {a: 5, b: 10, op1: 3]
 export function getTwoNumbersMulti01() {
   const op1 = 3;
-  const a = getRandomInt(1, 9);
-  const b = getRandomInt(1, 9);
+  const a = getRandomInt(2, 9);
+  const b = getRandomInt(2, 9);
+
+  return {
+    a,
+    b,
+    op1,
+  };
+}
+
+// retrun {a: 10, b: 2, op1: 4]
+export function getTwoNumbersDivide() {
+  const op1 = 4;
+  let a = getRandomInt(2, 9);
+  const b = getRandomInt(2, 9);
+  a = a * b;
 
   return {
     a,
@@ -136,6 +150,7 @@ export const OPTIONS_TYPE = [
   { value: "4", label: "连减" },
   { value: "5", label: "加减混合" },
   { value: "6", label: "乘法口诀" },
+  { value: "7", label: "除法"}
 ];
 
 export const createExercises = (noPerPage, numMax, funcExercise) => {
@@ -177,6 +192,10 @@ export const getTypeFunc = (type01) => {
     }
     case "6": {
       func01 = getTwoNumbersMulti01;
+      break;
+    }
+    case "7": {
+      func01 = getTwoNumbersDivide;
       break;
     }
     default: {
